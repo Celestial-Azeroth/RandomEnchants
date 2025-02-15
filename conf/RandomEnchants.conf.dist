@@ -1,0 +1,52 @@
+[worldserver]
+
+#
+########################################
+
+########################################
+#
+#    RandomEnchants.Enable
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+
+RandomEnchants.Enable = 1
+
+#
+#    RandomEnchants.AnnounceOnLogin
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+
+RandomEnchants.AnnounceOnLogin = 1
+
+#
+#    RandomEnchants.OnLoot
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+
+RandomEnchants.OnLoot = 1
+
+#
+#    RandomEnchants.EnchantChance
+#        Default:     35 %
+#
+
+RandomEnchants.EnchantChance = 80
+
+#
+#    RandomEnchants.OnCraft
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+
+RandomEnchants.OnCraft = 1
+
+#
+#    RandomEnchants.OnLoot
+#        Default:     0 - Disabled
+#                     1 - Enabled
+#
+
+RandomEnchants.OnGroupRoll = 1
