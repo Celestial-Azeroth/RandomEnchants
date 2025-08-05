@@ -26,19 +26,19 @@ void RollEnchant(Player* player, Item* item)
     uint32 enchantChance = sConfigMgr->GetOption<float>("RandomEnchants.EnchantChance", 35.0f);
 
     // Roll if the item should get enchanted or not (0 - 100)
-    if(rand_chance() > enchantChance)
+    if (rand_chance() > enchantChance)
     {
         return;
     }
 
     uint32 enchantID = GetRandomEnchantment(item);
 
-    if(enchantID == -1)
+    if (enchantID == -1)
     {
         return;
     }
 
-    if(sSpellItemEnchantmentStore.LookupEntry(enchantID))
+    if (sSpellItemEnchantmentStore.LookupEntry(enchantID))
     {
         player->ApplyEnchantment(item, EnchantmentSlot(5), false);
         item->SetEnchantment(EnchantmentSlot(5), enchantID, 0, 0);
@@ -64,8 +64,8 @@ uint32 GetRandomEnchantment(Item* item)
             return static_cast<uint32>(normalizedLevel);
         };
 
-     // At the moment the length of the arrays are all the same...
-    // So we can just do it here
+    // At the moment the length of the arrays are all the same...
+   // So we can just do it here
     uint32 enchantTier = GetEnchantTier(itemLevel, 10);
     float rnd = rand_chance();
 
@@ -100,55 +100,55 @@ uint32 GetRandomEnchantment(Item* item)
     }
     else
     {
-        static const std::vector<uint32> spiritEnchants = { 82, 83, 84, 98, 99, 100, 101, 351, 355, 360};
+        static const std::vector<uint32> spiritEnchants = { 82, 83, 84, 98, 99, 100, 101, 351, 355, 360 };
         return spiritEnchants[enchantTier];
     }
 
     return -1;
 }
 
-void RandomEnchantsPlayer::OnLogin(Player* player)
+void RandomEnchantsPlayer::OnPlayerLogin(Player* player)
 {
     bool announceOnLogin = sConfigMgr->GetOption<bool>("RandomEnchants.AnnounceOnLogin", true);
     bool enabled = sConfigMgr->GetOption<bool>("RandomEnchants.Enable", true);
 
-    if(announceOnLogin && enabled)
+    if (announceOnLogin && enabled)
     {
         ChatHandler(player->GetSession()).SendSysMessage("Random Enchants is Enabled.");
     }
 }
 
 // When Item gets Looted
-void RandomEnchantsPlayer::OnLootItem(Player* player, Item* item, uint32 count, ObjectGuid lootguid)
+void RandomEnchantsPlayer::OnPlayerLootItem(Player* player, Item* item, uint32 count, ObjectGuid lootguid)
 {
     bool onLoot = sConfigMgr->GetOption<bool>("RandomEnchants.OnLoot", true);
     bool enabled = sConfigMgr->GetOption<bool>("RandomEnchants.Enable", true);
 
-    if(onLoot && enabled)
+    if (onLoot && enabled)
     {
         RollEnchant(player, item);
     }
 }
 
 // When Item gets Crafted
-void RandomEnchantsPlayer::OnCreateItem(Player* player, Item* item, uint32 count)
+void RandomEnchantsPlayer::OnPlayerCreateItem(Player* player, Item* item, uint32 count)
 {
     bool onCraft = sConfigMgr->GetOption<bool>("RandomEnchants.OnCraft", true);
     bool enabled = sConfigMgr->GetOption<bool>("RandomEnchants.Enable", true);
 
-    if(onCraft && enabled)
+    if (onCraft && enabled)
     {
         RollEnchant(player, item);
     }
 }
 
 // When Item gets rolled for
-void RandomEnchantsPlayer::OnGroupRollRewardItem(Player* player, Item* item, uint32 count, RollVote voteType, Roll* roll)
+void RandomEnchantsPlayer::OnPlayerGroupRollRewardItem(Player* player, Item* item, uint32 count, RollVote voteType, Roll* roll)
 {
     bool onGroupRoll = sConfigMgr->GetOption<bool>("RandomEnchants.OnGroupRoll", true);
     bool enabled = sConfigMgr->GetOption<bool>("RandomEnchants.Enable", true);
 
-    if(onGroupRoll && enabled)
+    if (onGroupRoll && enabled)
     {
         RollEnchant(player, item);
     }
